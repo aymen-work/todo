@@ -6,7 +6,7 @@ import HomeView from './views/HomeView.vue';
 
 <template>
   <Navbar/>
-  <HomeView/>
+  <RouterView/>
 </template>
 
 <style scoped>
