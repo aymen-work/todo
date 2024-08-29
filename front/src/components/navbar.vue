@@ -18,20 +18,20 @@ import { RouterLink, RouterView } from 'vue-router'
             </a>
             <div class="md:ml-auto">
               <div class="flex space-x-2">
-                <a
-                  href="index.html"
+                <RouterLink
+                  to="/"
                   class="text-white bg-blue-900 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Home</a
+                  >Home</RouterLink
                 >
-                <a
-                  href="jobs.html"
+                <RouterLink
+                  to="/tasks"
                   class="text-white hover:bg-blue-900 hover:text-white rounded-md px-3 py-2"
-                  >Jobs</a
+                  >All Tasks</RouterLink
                 >
-                <a
-                  href="add-job.html"
+                <RouterLink
+                  to="/tasks/add"
                   class="text-white hover:bg-blue-900 hover:text-white rounded-md px-3 py-2"
-                  >Add Job</a
+                  >Add Job</RouterLink
                 >
               </div>
             </div>
