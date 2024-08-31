@@ -2,6 +2,9 @@
 ToDo project to organize your tasks
 
 ### Installation 
+```bash
+$ python manage.py makemigrations
+```
 open terminal and run commands bellow
 ```$ git clone https://github.com/aymen-work/todo.git```
 ```$ cd todo```
