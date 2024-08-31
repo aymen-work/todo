@@ -1,14 +1,32 @@
 <script setup>
 import axios from 'axios';
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
 import router from '@/router';
+import { useRoute } from 'vue-router';
 import { useToast } from 'vue-toastification';
-
 const toast = useToast();
+const route = useRoute();
+defineProps({
+    title:{
+        default: 'Add task',
+        type: String,
+    },
+})
+
 const form = reactive({
     title: '',
     details: '',
     end_date: '',
+})
+
+onMounted(async ()=>{
+    if(route.name === 'update'){
+        const id = route.params.id
+        const result = await axios.get(`/api/api/v2/tasks/${id}`)
+        form.title = result.data.title
+        form.details = result.data.details
+        form.end_date = result.data.end_date
+    }
 })
 
 const addTask = async () => {
@@ -16,8 +34,7 @@ const addTask = async () => {
         title: form.title,
         details: form.details,
         end_date: form.end_date,
-        status: 'pending',
-        
+        status: 'pending', 
     };
     try{
         const response = await axios.post('/api/api/v2/addtask',data)
@@ -27,14 +44,28 @@ const addTask = async () => {
         console.error('Error adding task:', error);
     }
 }
+const updateTask = async () => {
+    try{const id = route.params.id
+    const newdata = {
+        title: form.title,
+        details: form.details,
+        end_date: form.end_date,
+    };
+    const update = await axios.patch(`/api/api/v2/tasks/${id}`,newdata)
+    router.push('/tasks')
+}
+    catch(error) {
+        toast.error('Error updating task:', error);
+    }
+}
 
 </script>
 
 <template>
     <div class="container">
         <div class="rounded-lg text-center p-5  mt-20 w-2/4 mx-auto shadow-lg shadow-slate-500">
-            <h1 class="font-bold text-3xl underline">Add Task</h1>
-            <form @submit.prevent="addTask" class="max-w-sm mx-auto">
+            <h1 class="font-bold text-3xl underline">{{ title }}</h1>
+            <form @submit.prevent="title==='Update'?updateTask() : addTask()" class="max-w-sm mx-auto">
                 <div class="mb-5">
                     <label for="title" class="block mb-2 font-medium text-gray-900 text-xl mt-6 ">Your title</label>
                     <input type="title" id="title" v-model="form.title"

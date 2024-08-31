@@ -12,7 +12,6 @@ const status = ref('pending')
 onMounted(async () => {
     try {
         const response = await axios.get(`api/api/v1/tasks/${status.value}`)
-        console.log('Tasks fetched:', response.data)
         data.value = response.data
     } catch (error) {
         console.error('Error fetching tasks:', error)
@@ -24,6 +23,16 @@ watch(() => status.value, async (newStatus) => {
     const response = await axios.get(`api/api/v1/tasks/${status.value}`)
     data.value = response.data
 })
+
+function aa(m){
+    if(m.status === 'completed'){
+        toast.success('Tasks completed')
+    }else if(m.status === 'cancelled'){
+        toast.warning('Tasks cancelled')
+    }else{
+        toast.info(`Tasks pending and expired in ${m.end_date}`)
+    }
+}
 
 </script>
 
@@ -47,7 +56,7 @@ watch(() => status.value, async (newStatus) => {
 </div>
 
 
-    <div v-if="data" v-for="t in data" class="grid grid-flow-col mt-5">
+    <div  v-if="data" v-for="t in data" @click="aa(t)" class="grid grid-flow-col mt-5 hover:cursor-pointer">
         <div class="col-span-1">{{ t.id }}</div>
         <div class="col-span-1">{{ t.title }}</div>
         <div class="col-span-1">{{ t.end_date }}</div>

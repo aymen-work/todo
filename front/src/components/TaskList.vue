@@ -3,6 +3,7 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useToast } from "vue-toastification";
 import Alert from "./Alert.vue";
+import router from "@/router";
 
 const toast = useToast();
 const data = ref();
@@ -36,13 +37,13 @@ async function cancelTask(id) {
 }
 
 async function deleteTask(id) {
-  try{
+  try {
     const confirm = window.confirm('Are you sure you want to delete this task?')
-    if(confirm){
+    if (confirm) {
       const response = await axios.delete(`api/api/v2/tasks/${id}`)
       window.location.reload();
     }
-  }catch(error){
+  } catch (error) {
     console.log("Error deleting task:", error);
     toast.error("Error deleting task");
   }
@@ -54,7 +55,7 @@ async function doneTask(id) {
       "Are you sure you want to cancel this task?"
     );
     if (confirm) {
-      const response = await axios.patch(`api/api/v2/tasks/${id}`, {status: "completed",});
+      const response = await axios.patch(`api/api/v2/tasks/${id}`, { status: "completed", });
       // toast.success("Task marked as done");
       window.location.reload();
     }
@@ -62,6 +63,9 @@ async function doneTask(id) {
     console.error("Error marking task as done:", error);
     toast.error("Error marking task as done");
   }
+}
+function modify(id){
+  router.push(`/tasks/update/${id}`)
 }
 </script>
 
@@ -87,7 +91,12 @@ async function doneTask(id) {
         ]">
           <div class="p-4">
             <div class="mb-6 text-center">
-              <h3 class="text-xl font-bold">{{ t.title }}</h3>
+              <h3 class="text-xl font-bold">{{ t.title }}&nbsp;&nbsp;<li @click="modify(t.id)" :class="['pi', 'pi-pencil' ,'hover:cursor-pointer',
+          t.status == 'cancelled'
+            ? 'text-red-600'
+            : t.status == 'completed'
+              ? 'text-green-400'
+              : 'text-yellow-400' ,'text-2xl']"></li></h3>
             </div>
 
             <div class="mb-5 text-xl">
@@ -95,7 +104,7 @@ async function doneTask(id) {
             </div>
 
             <h3 class="text-blue-500 mb-2">Start Date: {{ t.created_date }}</h3>
-            <h3 class="text-blue-500 mb-2">Start Date: {{ t.end_date }}</h3>
+            <h3 class="text-blue-500 mb-2">End Date: {{ t.end_date }}</h3>
 
             <div class="border border-gray-100 mb-5"></div>
 
