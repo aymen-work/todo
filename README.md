@@ -2,26 +2,49 @@
 ToDo project to organize your tasks
 
 ### Installation 
+open terminal and run commands bellow
+```bash
+$  git clone https://github.com/aymen-work/todo.git
+```
+```bash
+$ cd todo
+```
+### backend server
+```bash
+$ cd back
+```
+```bash
+$ python -m venv venv
+```
+```bash
+$ venv\Scripts\activate
+```
+```bash
+$ pip install -r requierments.txt
+```
 ```bash
 $ python manage.py makemigrations
 ```
-open terminal and run commands bellow
-```$ git clone https://github.com/aymen-work/todo.git```
-```$ cd todo```
-### backend server
-```$ cd back```
-```$ python -m venv venv```
-```$ venv\Scripts\activate```
-```$ pip install -r requierments.txt```
-```$ python manage.py makemigrations```
-```$ python manage.py migrate```
-```$ python manage.py createsuperuser```
-```$ python manage.py runserver```
+```bash
+$ python manage.py migrate
+```
+```bash
+$ python manage.py createsuperuser
+```
+```bash
+$ python manage.py runserver
+```
 
 ### frontend server
-```$ cd front```
-```$ npm i```
-```$ npm run dev```
+```bash
+$ cd front
+```
+```bash
+$ npm i
+```
+```bash
+$ npm run dev
+```
 
 ## finally open your browser on http://localhost:3000
 
