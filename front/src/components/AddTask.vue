@@ -1,7 +1,10 @@
 <script setup>
 import axios from 'axios';
 import { reactive } from 'vue';
+import router from '@/router';
+import { useToast } from 'vue-toastification';
 
+const toast = useToast();
 const form = reactive({
     title: '',
     details: '',
@@ -18,6 +21,8 @@ const addTask = async () => {
     };
     try{
         const response = await axios.post('/api/api/v2/addtask',data)
+        router.push('/tasks')
+        toast.success('Task was added successfully')
     }catch(error) {
         console.error('Error adding task:', error);
     }

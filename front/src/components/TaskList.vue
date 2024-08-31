@@ -35,6 +35,19 @@ async function cancelTask(id) {
   }
 }
 
+async function deleteTask(id) {
+  try{
+    const confirm = window.confirm('Are you sure you want to delete this task?')
+    if(confirm){
+      const response = await axios.delete(`api/api/v2/tasks/${id}`)
+      window.location.reload();
+    }
+  }catch(error){
+    console.log("Error deleting task:", error);
+    toast.error("Error deleting task");
+  }
+}
+
 async function doneTask(id) {
   try {
     const confirm = window.confirm(
@@ -92,12 +105,16 @@ async function doneTask(id) {
                 {{ t.status.toUpperCase() }}
               </div>
               <button v-if="t.status !== 'completed' & t.status !== 'cancelled'" @click="cancelTask(t.id)"
-                class="h-[36px] bg-red-500 hover:bg-red-600 col-span-1 text-white px-4 mr-3 py-2 rounded-lg text-center text-sm">
+                class="h-[36px] bg-yellow-500 hover:bg-yellow-600 col-span-1 text-white px-4 mr-3 py-2 rounded-lg text-center text-sm">
                 Cancel
               </button>
               <button v-if="t.status !== 'completed' & t.status !== 'cancelled'" @click="doneTask(t.id)"
                 class="h-[36px] bg-green-500 hover:bg-green-600 col-span-1 text-white px-4 py-2 rounded-lg text-center text-sm">
                 Done
+              </button>
+              <button v-if="t.status === 'completed' | t.status === 'cancelled'" @click="deleteTask(t.id)"
+                class="h-[36px] bg-red-500 hover:bg-red-600 col-span-1 text-white px-4 py-2 rounded-lg text-center text-sm">
+                Delete
               </button>
             </div>
           </div>

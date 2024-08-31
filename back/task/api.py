@@ -11,7 +11,7 @@ def get_tasks(request):
     serializer.data
     return Response(serializer.data)
 
-class GetUpdateTask(generics.RetrieveUpdateAPIView):
+class GetUpdateTask(generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     lookup_field = 'id'
