@@ -6,13 +6,8 @@ from rest_framework.decorators import api_view
 from rest_framework import generics
 
 @api_view(['GET'])
-<<<<<<< HEAD
 def get_tasks(request,status=None):
     tasks = Task.objects.all().filter(status=status) if status != None else Task.objects.all() 
-=======
-def get_tasks(request):
-    tasks = Task.objects.all()
->>>>>>> parent of debec4f (feature: add filtering tasks in home page)
     serializer = TaskSerializer(tasks,many=True)
     return Response(serializer.data)
 
