@@ -5,8 +5,8 @@ from rest_framework.decorators import api_view
 from rest_framework import generics
 
 @api_view(['GET'])
-def get_tasks(request):
-    tasks = Task.objects.all()
+def get_tasks(request,status):
+    tasks = Task.objects.all().filter(status=status)
     serializer = TaskSerializer(tasks,many=True)
     serializer.data
     return Response(serializer.data)
