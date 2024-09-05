@@ -63,13 +63,13 @@ const updateTask = async () => {
 
 <template>
     <div class="container">
-        <div class="rounded-lg text-center p-5  mt-20 w-2/4 mx-auto shadow-lg shadow-slate-500">
+        <div class="rounded-lg text-center p-5  mt-20 w-2/4 mx-auto shadow-lg bg-slate-300 shadow-slate-500">
             <h1 class="font-bold text-3xl underline">{{ title }}</h1>
             <form @submit.prevent="title==='Update'?updateTask() : addTask()" class="max-w-sm mx-auto">
                 <div class="mb-5">
                     <label for="title" class="block mb-2 font-medium text-gray-900 text-xl mt-6 ">Your title</label>
                     <input type="title" id="title" v-model="form.title"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:outline-blue-600 "
+                        class="bg-gray-50 dark:bg-slate-500 dark:placeholder-white border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:outline-blue-600 "
                         placeholder="Title of task" required />
                 </div>
                 <div class="mb-5">

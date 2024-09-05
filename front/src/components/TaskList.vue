@@ -70,9 +70,9 @@ function modify(id){
 </script>
 
 <template>
-  <section class="bg-blue-50 px-4 py-10">
+  <section class="bg-blue-50 dark:bg-slate-800 px-4 py-10">
     <div class="container-xl lg:container m-auto">
-      <h2 class="text-3xl font-bold text-blue-500 mb-6 text-center">
+      <h2 class="text-3xl font-bold text-blue-500 mb-6 dark:text-white text-center">
         Browse Tasks
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

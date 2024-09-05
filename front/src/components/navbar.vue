@@ -1,9 +1,13 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { useDark, useToggle } from "@vueuse/core";
+
+const isDark = useDark();
+const toggleDark = useToggle(isDark);
 </script>
 
 <template>
-    <nav class="bg-blue-500 border-b border-green-500">
+    <nav class="bg-blue-500 dark:bg-blue-900 border-b border-green-500">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="flex h-20 items-center justify-between">
           <div
@@ -33,6 +37,7 @@ import { RouterLink, RouterView } from 'vue-router'
                   class="text-white hover:bg-blue-900 hover:text-white rounded-md px-3 py-2"
                   >Add Job</RouterLink
                 >
+                <li class="pi pi-pen-to-square rounded-md px-3 py-2" @click="toggleDark()"></li>
               </div>
             </div>
           </div>

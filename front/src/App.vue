@@ -1,13 +1,15 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import Navbar from './components/navbar.vue'
-import HomeView from './views/HomeView.vue';
 </script>
 
 <template>
-  <Navbar/>
+  <main class=" bg-white dark:bg-slate-700 h-screen">
+    <Navbar/>
+
+    <RouterView/>
+  </main>
   
-  <RouterView/>
 </template>
 
 <style scoped>
