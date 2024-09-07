@@ -72,7 +72,7 @@ function modify(id){
 <template>
   <section class="bg-blue-50 dark:bg-slate-800 px-4 py-10">
     <div class="container-xl lg:container m-auto">
-      <h2 class="text-3xl font-bold text-blue-500 mb-6 dark:text-white text-center">
+      <h2 class="text-3xl font-bold text-green-800 mb-6 dark:text-white text-center">
         Browse Tasks
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -80,13 +80,15 @@ function modify(id){
         <div v-for="t in data" :class="[
           'border-t-8',
           t.status == 'cancelled'
-            ? 'border-red-600'
+            ? 'border-red-600 shadow-red-600'
             : t.status == 'completed'
-              ? 'border-green-400'
-              : 'border-yellow-400',
+              ? 'border-green-400 shadow-green-400'
+              : 'border-yellow-400 shadow-yellow-400',
           'bg-white',
+          'dark:bg-slate-800',
+          'dark:text-white',
           'rounded-xl',
-          'shadow-md',
+          'shadow-sm',
           'relative',
         ]">
           <div class="p-4">
@@ -109,7 +111,7 @@ function modify(id){
             <div class="border border-gray-100 mb-5"></div>
 
             <div class="grid grid-flow-col mb-4">
-              <div class="font-bold text-black col-span-4 mb-3">
+              <div class="font-bold text-black dark:text-white col-span-4 mb-3">
                 <i class="fa-solid fa-location-dot text-lg"></i>
                 {{ t.status.toUpperCase() }}
               </div>
