@@ -4,6 +4,8 @@ import { onMounted, reactive } from 'vue';
 import router from '@/router';
 import { useRoute } from 'vue-router';
 import { useToast } from 'vue-toastification';
+import dayjs from 'dayjs';
+
 const toast = useToast();
 const route = useRoute();
 defineProps({
@@ -25,7 +27,8 @@ onMounted(async ()=>{
         const result = await axios.get(`/api/api/v2/tasks/${id}`)
         form.title = result.data.title
         form.details = result.data.details
-        form.end_date = result.data.end_date
+        form.end_date = dayjs(result.data.end_date).format('YYYY-MM-DDTHH:mm')
+        // console.log( result.data.end_date.split('T'),dayjs(result.data.end_date).format('YYYY-MM-DDTHH:mm'))
     }
 })
 
