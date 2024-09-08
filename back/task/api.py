@@ -4,12 +4,15 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import generics
+from datetime import datetime
 
 @api_view(['GET'])
 def get_tasks(request,status=None):
     tasks = Task.objects.all().filter(status=status) if status != None else Task.objects.all() 
-    serializer = TaskSerializer(tasks,many=True)
-    return Response(serializer.data)
+    serializer = TaskSerializer(tasks,many=True).data
+    for s in serializer:
+        s['end_date'] = datetime.strptime(s['end_date'], "%Y-%m-%dT%H:%M:%S%z").strftime("%Y-%m-%d %I:%M %p")
+    return Response(serializer)
 
 class GetUpdateTask(generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()

@@ -11,7 +11,6 @@ const data = ref();
 onMounted(async () => {
   try {
     const response = await axios.get("api/api/v1/tasks");
-    console.log("Tasks fetched:", response.data);
     data.value = response.data;
   } catch (error) {
     console.error("Error fetching tasks:", error);

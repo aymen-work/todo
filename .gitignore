@@ -31,3 +31,5 @@ coverage
 
 venv/
 *.sqlite3
+migrations
+__pycache__/
